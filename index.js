@@ -16,10 +16,11 @@ app.get('/', (req, res, next) => {
 
 const PORT = process.env.PORT || 8000;
 
-app.listen(port, () => {
+app.listen(PORT, () => {
     mongoose.set('useFindAndModify', false);
     mongoose.connect(process.env.MONGODB_URI, {
-        useNewUrlParser: true
+        useNewUrlParser: true,
+        useUnifiedTopology: true
     })
     console.log(`Server listening on port ${PORT}`)
 });

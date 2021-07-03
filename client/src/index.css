@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.bg-main {
+    background: #25dc99 !important;
+}
+
+.container {
+    max-width: 100rem;
+    padding: 0 10rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.7rem 1rem;
+    border-radius: 0.2rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    margin: 0 0.3rem;
+}
+
+.btn-blue {
+    background: #17a2b8;
+    border: 1px solid #17a2b8;
+    color: #fff;
+}
+
+.form-group {
+    width: 100%;
+}
+
+.btn-blue:focus,
+.btn-blue:active {
+    outline: none;
+}
+
+.btn-primary {
+    background: #28a745;
+    border: 1px solid #28a745;
+    color: #fff;
+}
+
+.btn-primary:focus,
+.btn-primary:active {
+    outline: none;
+}
+
+.btn-danger {
+    background: #dc3545;
+    border: 1px solid #dc3545;
+    color: #fff;
+}
+
+.btn-danger:focus,
+.btn-danger:active {
+    outline: none;
+}
+
+.btn-lg {
+    width: 79%;
+}
+
+.btn-plain {
+    background: #fff;
+    color: #333;
+}
+
+.is-invalid {
+    border: 1px solid red;
+}
+
+.invalid-feedback {
+    color: red;
+    padding-top: 0.3rem;
+}
+
+.mt-3 {
+    margin-top: 0.8rem;
+}
+
+.mb-3 {
+    margin-bottom: 0.5rem;
+}
+
+.mb-4 {
+    margin-bottom: 1rem;
+}
+
+.mx-2 {
+    margin-left: 0.8rem;
+}
+
+.text-center {
+    text-align: center;
+}
