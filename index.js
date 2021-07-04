@@ -2,6 +2,9 @@ const express = require('express');
 require('dotenv').config();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const Role = require('./models/Role')
+const { seedDatabaseWithRoles } = require('./seeders/RoleSeeder')
+
 
 const app = express();
 
@@ -29,7 +32,19 @@ const db = mongoose.connection;
 
 db.on('error', (err) => console.log(err));
 
-db.once('open', () => {
+db.once('open', async() => {
+    require('./routes/api/authRoutes')(app)
+    if (process.env.NODE_ENV === 'production') {
+        app.use(express.static('../netsafari-spa/build'))
+
+        app.get('*', (req, res) => {
+            res.sendFile(path.resolve(__dirname, 'netsafari-spa', 'build', 'index.html'))
+        });
+    }
+
+    if (await Role.isRolesCollectionEmpty()) {
+        await seedDatabaseWithRoles();
+    }
     console.log(`Successfully connected to the database`);
 });
 
