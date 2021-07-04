@@ -16,21 +16,20 @@ const Navbar = () => {
             </Link>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul className="navbar-nav mr-auto">
-                     <li className="nav-item">
-                        <Link className="nav-link" to='/rent-request/add'>
-                            <i className='fa fa-plus'></i>
-                             Rent Request</Link>
-                    </li>
-                </ul>
-                <ul className='navbar-nav nav-right'>
+                <ul className='navbar-nav nav-right ml-auto'>
                     <Fragment>
                         <li className="nav-item ml-3">
                             <button  type='button' className='btn btn-outline-light' onClick={() => handleLogOut()} >Logout</button>
                         </li>
                     </Fragment>
                     <li className="nav-item d-flex align-items-center">
+                        <Link className="nav-link" to='/login' >Sign up</Link>
+                    </li>
+                    <li className="nav-item d-flex align-items-center">
                         <Link className="nav-link" to='/login' >Login</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" to='/rent-request/add'>Apply</Link>
                     </li>
                 </ul>
         </div>
