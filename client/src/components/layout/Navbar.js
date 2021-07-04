@@ -23,7 +23,7 @@ const Navbar = () => {
                         </li>
                     </Fragment>
                     <li className="nav-item d-flex align-items-center">
-                        <Link className="nav-link" to='/login' >Sign up</Link>
+                        <Link className="nav-link" to='/sign-up' >Sign up</Link>
                     </li>
                     <li className="nav-item d-flex align-items-center">
                         <Link className="nav-link" to='/login' >Login</Link>
