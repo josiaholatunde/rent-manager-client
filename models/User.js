@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { Schema } = mongoose
-const { jwtSecret } = process.env.JWT_SECRET
+const jwtSecret = process.env.JWT_SECRET
 const userVerificationStatuses = require('../data/userVerificationStatuses')
 
 const UserSchema = new Schema({

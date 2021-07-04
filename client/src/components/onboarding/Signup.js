@@ -1,11 +1,19 @@
 import React, { useState } from 'react'
+import { connect, useDispatch, useSelector } from 'react-redux';
+import { createUserAccount } from '../../redux/actions/authActions' 
+import { withRouter } from "react-router-dom";
+import Spinner from '../../components/layout/Spinner'
 
-export const Signup = () => {
+const Signup = ({ history }) => {
 
     const [userName, setUserName ] = useState('')
     const [fullName, setFullName ] = useState('')
     const [password, setPassword ] = useState('')
     const [errors, setErrors] = useState({})
+
+    const dispatch = useDispatch();
+
+    const loading = useSelector(state => state.loading);
 
 
     const validateUsername = (userName) => {
@@ -59,13 +67,19 @@ export const Signup = () => {
             setErrors(errors)
             return false;
         }
+
+        dispatch(createUserAccount({
+            userName,
+            fullName,
+            password
+        }, history))
     }
 
     const isRegisterationFormInvalid = () => {
         return Object.keys(errors).length > 0
     }
 
-    return (<div className='row mt-5'>
+    return loading ? <Spinner /> : (<div className='row mt-5'>
                 <div className='col-lg-6 offset-lg-3'>
                     <h5>Register</h5>
                     <div className ="card p-3">
@@ -119,3 +133,5 @@ export const Signup = () => {
             </div>
         </div>)
 }
+
+export default connect(null, { createUserAccount })(withRouter(Signup))

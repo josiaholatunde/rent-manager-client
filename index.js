@@ -1,6 +1,7 @@
 const express = require('express');
 require('dotenv').config();
 const mongoose = require('mongoose');
+var cors = require('cors')
 const bodyParser = require('body-parser');
 const Role = require('./models/Role')
 const { seedDatabaseWithRoles } = require('./seeders/RoleSeeder')
@@ -12,6 +13,13 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(bodyParser.json());
+app.use(cors())
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'Accept, X-Requested-With, Authorization, Content-Type, x-custom-header');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,PATCH,DELETE,OPTIONS');
+    next();
+});
 
 app.get('/', (req, res, next) => {
     res.send('Hello from the base url');

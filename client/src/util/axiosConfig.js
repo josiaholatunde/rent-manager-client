@@ -11,7 +11,7 @@ const axiosDefaultInstance = axios.create({
     headers: {
         'Content-Type': 'application/json',
     },
-    withCredentials: true
+    // withCredentials: true
 });
 
 axiosDefaultInstance.interceptors.response.use((response) => {
