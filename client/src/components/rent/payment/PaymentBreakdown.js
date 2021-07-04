@@ -2,15 +2,30 @@ import React from 'react'
 import currencyFormatter from '../../../util/currencyFormatter'
 import '../CreateRentRequest.scss'
 import './PaymentBreakdown.scss'
+import { connect, useDispatch, useSelector } from 'react-redux';
+import { handleRentRequest } from '../../../redux/actions/rentActions' 
+import { withRouter } from "react-router-dom";
+import Spinner from '../../layout/Spinner'
 
 const PaymentBreakdown = ({ 
+    salaryAmount,
     requestAmount, paymentPlan, handleRequestAmount,  
-    handlePaymentPlan}) => {
+    handlePaymentPlan, handleRentRequest , history}) => {
+
+    const dispatch = useDispatch();
+
+    const loading = useSelector(state => state.loading);
 
     const DEFAULT_INTEREST_PERCENTAGE = 2;
-    const submitRentRequest = () => {
-
+    const submitRentRequest = (event) => {
+        event.preventDefault()
+        dispatch (handleRentRequest({
+            requestAmount,
+            paymentPlan,
+            salaryAmount
+        }, history))
     }
+
 
     const computeMonthlyPayment = (requestAmount, paymentPlan) => {
         const monthlyPayment = requestAmount / paymentPlan;
@@ -19,10 +34,10 @@ const PaymentBreakdown = ({
         return currencyFormatter(totalMonthlyPayment)
     }
 
-    return (<div className ="card p-3">
+    return loading ? (<Spinner />) :  (<div className ="card p-3">
                     <div className='card-body'>
                     <h5 className='text-dark-purple'>Payment Breakdown</h5>
-                        <form onSubmit={() => submitRentRequest()} className='mt-3'>
+                        <form onSubmit={submitRentRequest} className='mt-3'>
                             <div className='form-group my-3'>
                                 <label>Rent request amount ?</label>
                                 <input type='number' name='requestAmount' value={requestAmount} 
@@ -68,4 +83,5 @@ const PaymentBreakdown = ({
     );
 }
 
-export default PaymentBreakdown
+export default connect(null, { handleRentRequest })
+(withRouter(PaymentBreakdown))

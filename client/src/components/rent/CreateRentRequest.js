@@ -3,6 +3,7 @@ import './CreateRentRequest.scss'
 import PaymentBreakdown from './payment/PaymentBreakdown'
 import InitiateRentRequestForm from './InitiateRentRequestForm'
 
+
 const CreateRentRequest = () => {
 
     const [requestAmount, setRequestAmount] = useState('')
@@ -21,6 +22,7 @@ const CreateRentRequest = () => {
                 <h5>My Rent</h5>
                 {
                     shouldDisplayPaymentBreakDown ? <PaymentBreakdown 
+                    salaryAmount={salaryAmount}
                     handleRequestAmount= {setRequestAmount}
                     handlePaymentPlan={setPaymentPlan}
                     requestAmount={requestAmount} 

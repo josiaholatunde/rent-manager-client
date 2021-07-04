@@ -85,7 +85,7 @@ export const loginUser = (userToLogin, { history, location }) => dispatch => {
                     if (location.state && location.state.pathname) {
                         history.push(location.state.pathname)
                     } else {
-                        history.push('/')
+                        history.push('/rent-request/add')
                     }
                 }
             } catch (error) {

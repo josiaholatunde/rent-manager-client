@@ -41,7 +41,8 @@ const db = mongoose.connection;
 db.on('error', (err) => console.log(err));
 
 db.once('open', async() => {
-    require('./routes/api/authRoutes')(app)
+    require('./routes/api/authRoutes')(app);
+    require('./routes/api/rentRequestRoutes')(app);
     if (process.env.NODE_ENV === 'production') {
         app.use(express.static('../netsafari-spa/build'))
 

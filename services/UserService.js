@@ -2,14 +2,20 @@ const User = require('../models/User')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const jwtSecret = process.env.JWT_SECRET
-    // const RoleService = require('../services/RoleService')
-    // const Logger = require('./logger/logger_service')
-    // const userLogger = new Logger('user')
 
 module.exports = {
     getUserFromDb: async function(userName) {
         try {
             const userFromDb = await User.findOne({ userName });
+            return userFromDb;
+        } catch (err) {
+            console.log(err);
+            return null;
+        }
+    },
+    findById: async function(userId) {
+        try {
+            const userFromDb = await User.findById(userId);
             return userFromDb;
         } catch (err) {
             console.log(err);

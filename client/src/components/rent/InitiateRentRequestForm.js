@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 
-const InitiateRentRequestForm = ({ handleRentRequest, 
+const InitiateRentRequestForm = ({  handleRentRequest, 
     salaryAmount, paymentPlan, requestAmount,
     handleRequestAmount, handlePaymentPlan, handleSalaryAmount
  }) => {
@@ -9,31 +9,35 @@ const InitiateRentRequestForm = ({ handleRentRequest,
     const [accommodationStatus, setAccommodationStatus] = useState('renew_rent')
     const [errors, setErrors] = useState({})
 
-    const validateRequestAmount = () => {
-        const errors = {}
-        if (!requestAmount) {
-            errors.requestAmount = 'The request amount field is required'
-        } 
-        setErrors(errors)
+    const validateRequestAmount = (requestAmount) => {
+        const updatedErrors = {...errors}
+        if (!requestAmount || requestAmount.trim().length === 0) {
+            updatedErrors.requestAmount = 'The request amount field is required'
+        } else {
+            delete updatedErrors.requestAmount
+        }
+        setErrors(updatedErrors)
     }
 
-    const validateSalaryAmount = () => {
-        const errors = {}
-        if (!salaryAmount) {
-            errors.salaryAmount = 'The salary amount field is required'
+    const validateSalaryAmount = (salaryAmount) => {
+        const updatedErrors = {...errors}
+        if (!salaryAmount ||  salaryAmount.trim().length === 0) {
+            updatedErrors.salaryAmount = 'The salary amount field is required'
+        } else {
+            delete updatedErrors.salaryAmount
         }
-        setErrors(errors)
+        setErrors(updatedErrors)
     }
 
 
     const validateFormDetails = () => {
-        const errors = {};
+        const errors = {}
         
-        if (!requestAmount) {
+        if (!requestAmount || requestAmount.trim().length === 0) {
             errors.requestAmount = 'The request amount field is required'
         } 
         
-        if (!salaryAmount) {
+        if (!salaryAmount || salaryAmount.trim().length === 0) {
             errors.salaryAmount = 'The salary amount field is required'
         }
 
@@ -54,7 +58,7 @@ const InitiateRentRequestForm = ({ handleRentRequest,
                 requestAmount,
                 salaryAmount,
                 paymentPlan
-            });
+            })
         }
     }
 
@@ -81,7 +85,7 @@ const InitiateRentRequestForm = ({ handleRentRequest,
                 <input type='number' name='requestAmount' value={requestAmount} 
                 className='form-control' onChange={({ target: { value }}) => {
                     handleRequestAmount(value)
-                    validateRequestAmount()
+                    validateRequestAmount(value)
                 }} placeholder='Amount' />
                 {
                     errors.requestAmount && (<span className='text-danger error-text'>{errors.requestAmount}</span>)
@@ -93,7 +97,7 @@ const InitiateRentRequestForm = ({ handleRentRequest,
                 <input type='text' name='salaryAmount' value={salaryAmount} 
                 className='form-control' onChange={({ target: { value }}) => { 
                     handleSalaryAmount(value)
-                    validateSalaryAmount()
+                    validateSalaryAmount(value)
                 }} placeholder='Amount' />
                 {
                     errors.salaryAmount && (<span className='text-danger error-text'>{errors.salaryAmount}</span>)
