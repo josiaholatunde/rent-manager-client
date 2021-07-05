@@ -44,9 +44,6 @@ const Navbar = ({ history }) => {
             <li className="nav-item d-flex align-items-center">
                 <span >Hello {getInitialOfLoggedInUser(user)}</span>
             </li>
-            <li className="nav-item">
-                <Link className="nav-link" to='/rent-request/add'>Apply</Link>
-            </li>
             <li className="nav-item ml-3">
                 <button  type='button' className='btn btn-outline-light' onClick={() => handleLogOut()} >Logout</button>
             </li>
@@ -56,11 +53,16 @@ const Navbar = ({ history }) => {
 
     return (<nav className="navbar navbar-expand-lg navbar-light bg-purple sticky-top" >
     <div className='container'>
-        <Link className="navbar-brand logo-container"  to="/">
-            <img src={kwaba} />
+        <Link className="navbar-brand"  to="/">
+            <h3>Kwaba</h3>
         </Link>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className='navbar-nav mr-auto'>
+                <li className="nav-item">
+                    <Link className="nav-link" to='/rent-request/add'>Rent Request Application</Link>
+                </li>
+            </ul>
                 <ul className='navbar-nav nav-right ml-auto'>
                    
                     { 

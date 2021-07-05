@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 const InitiateRentRequestForm = ({  handleRentRequest, 
     salaryAmount, paymentPlan, requestAmount,
@@ -65,7 +66,12 @@ const InitiateRentRequestForm = ({  handleRentRequest,
 
     return (<div className ="card p-3">
     <div className='card-body'>
-    <h5 className='text-dark-purple'>Payment Option</h5>
+    <div class='d-flex justify-content-between'>
+        <h5 className='text-dark-purple'>Payment Option</h5>
+        <div className='d-flex' style={{ width: 30, height: 30 }}>
+            <CircularProgressbar value={50} text={`50%`} styles={buildStyles({backgroundColor: '#25dc99'})} />
+        </div>
+    </div>
         <form onSubmit={handleSubmit} className='mt-3'>
             <div className='form-group'>
                 <label>What's your accomodation status ?</label>
