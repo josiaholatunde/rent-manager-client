@@ -38,6 +38,7 @@ function App() {
                 <Switch>
                   <Route path='/login' exact component={Login} />
                   <Route path='/sign-up' exact component={Signup} />
+                  <Route path='/' exact component={Signup} />
                   <PrivateRoute path='/rent-request/add' exact component={CreateRentRequest} />
                 </Switch>
               </div>

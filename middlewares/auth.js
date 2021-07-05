@@ -23,7 +23,7 @@ module.exports = async(req, res, next) => {
 
     } catch (err) {
         console.log(err)
-        return ResponseService.send(403, res, 'An error occurred during the user verification process', null, {
+        return ResponseService.send(401, res, 'An error occurred during the user verification process', null, {
             msg: err
         })
     }

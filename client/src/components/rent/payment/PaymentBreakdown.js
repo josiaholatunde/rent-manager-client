@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import currencyFormatter from '../../../util/currencyFormatter'
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { handleRentRequest } from '../../../redux/actions/rentActions' 
@@ -11,16 +11,34 @@ const PaymentBreakdown = ({
     history,
     salaryAmount,
     requestAmount, paymentPlan, handleRequestAmount,  
-    handlePaymentPlan, handleShouldDisplayPaymentBreakDown }) => {
+    handlePaymentPlan }) => {
 
+    const [errors, setErrors] = useState({})
     const dispatch = useDispatch();
 
     const loading = useSelector(state => state.loading);
 
     const DEFAULT_INTEREST_PERCENTAGE = 2;
 
+    const validateRequestAmount = (requestAmount) => {
+        const updatedErrors = {...errors}
+        if (!requestAmount || requestAmount.trim().length === 0) {
+            updatedErrors.requestAmount = 'The request amount field is required'
+        } else {
+            delete updatedErrors.requestAmount
+        }
+        setErrors(updatedErrors)
+    }
+
     const submitRentRequest =  (event) => {
         event.preventDefault()
+        
+        validateRequestAmount(requestAmount)
+
+        if (Object.keys(errors).length > 0) {
+            return false;
+        }
+
         const rentPayload = {
             requestAmount,
             paymentPlan,
@@ -37,6 +55,8 @@ const PaymentBreakdown = ({
         return currencyFormatter(totalMonthlyPayment)
     }
 
+    
+
     return loading ? <Spinner /> :  (<div className ="card p-3">
                     <div className='card-body'>
                     <h5 className='text-dark-purple'>Payment Breakdown</h5>
@@ -44,7 +64,13 @@ const PaymentBreakdown = ({
                             <div className='form-group my-3'>
                                 <label>Rent request amount ?</label>
                                 <input type='number' name='requestAmount' value={requestAmount} 
-                                className='form-control' onChange={({ target: { value }}) => handleRequestAmount(value)} placeholder='Amount' />
+                                className='form-control' onChange={({ target: { value }}) => {
+                                    handleRequestAmount(value)
+                                    validateRequestAmount(value)
+                                }} placeholder='Amount' />
+                                {
+                                    errors.requestAmount && (<span className='text-danger error-text'>{errors.requestAmount}</span>)
+                                }
                             </div>
 
                             <div className='form-group my-3'>
@@ -76,7 +102,7 @@ const PaymentBreakdown = ({
                             </div>
 
                             <div className='form-group my-5'>
-                                <input type='submit' className='btn btn-lg btn-purple form-control'  value='Accept' /> 
+                                <input type='submit' disabled={Object.keys(errors).length > 0} className='btn btn-lg btn-purple form-control'  value='Accept' /> 
                             </div>
                         </form>
                     </div>

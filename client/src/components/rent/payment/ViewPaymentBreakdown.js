@@ -15,19 +15,7 @@ const ViewPaymentBreakdown = ({
 
     const dispatch = useDispatch();
 
-    const loading = useSelector(state => state.loading);
-
-
-    const submitRentRequest =  (event) => {
-        event.preventDefault()
-        const rentPayload = {
-            requestAmount,
-            paymentPlan,
-            salaryAmount
-        }
-        dispatch (handleRentRequest(rentPayload, history))
-    }
-
+    const { loading, rentRequest: { createdRentRequest} } = useSelector(state => state);
 
     const computeMonthlyPayment = (requestAmount, paymentPlan) => {
         const monthlyPayment = requestAmount / paymentPlan;
@@ -38,22 +26,18 @@ const ViewPaymentBreakdown = ({
 
     return loading ? <Spinner /> :  (<div className ="card p-3">
                     <div className='card-body'>
-                    <h5 className='text-dark-purple'>Payment Breakdown</h5>
-                        <form onSubmit={submitRentRequest} className='mt-3'>
+                            <div class='d-flex justify-content-between'>
+                                <h5 className='text-dark-purple'>Payment Breakdown</h5>
+                                <label>Status : <div>{computeStatus(createdRentRequest.isApproved)}</div></label>
+                            </div>
                             <div className='form-group my-3'>
                                 <label>Rent request amount ?</label>
-                                <input type='number' name='requestAmount' value={requestAmount} 
-                                className='form-control' onChange={({ target: { value }}) => handleRequestAmount(value)} placeholder='Amount' />
+                                <div> { createdRentRequest && createdRentRequest.requestAmount } </div>
                             </div>
 
                             <div className='form-group my-3'>
                                 <label>Monthly payment plan ?</label>
-                                <select className='form-control' name='paymentPlan' value={paymentPlan} onChange={({ target: {value }}) => handlePaymentPlan(value)}>
-                                    <option value='1'>1 Month</option>
-                                    <option value='3'>3 Months</option>
-                                    <option value='6'>6 Months</option>
-                                    <option value='12'>12 Months</option>
-                                </select>
+                                <div> { createdRentRequest && createdRentRequest.paymentPlan } months </div>
                             </div>
 
                             <div className='form-group my-3'>
@@ -61,23 +45,18 @@ const ViewPaymentBreakdown = ({
                                 <div className='card light-purple payment-option-card p-3'>
                                     <div className='d-flex justify-content-between'>
                                         <div> Pre-approved amount</div>
-                                        <div> { currencyFormatter(requestAmount) } </div>
+                                        <div> { currencyFormatter(createdRentRequest && createdRentRequest.requestAmount) } </div>
                                     </div>
                                     <div className='d-flex justify-content-between'>
                                         <div> Monthly Payment</div>
-                                        <div> { computeMonthlyPayment(requestAmount, paymentPlan) } </div>
+                                        <div> { computeMonthlyPayment(createdRentRequest.monthlyAmount) } </div>
                                     </div>
                                     <div className='d-flex justify-content-between'>
                                         <div> Tenor</div>
-                                        <div>  { paymentPlan }{ paymentPlan === 1 ? ' month' : ' months'} </div>
+                                        <div>  { createdRentRequest && createdRentRequest.paymentPlan }{ createdRentRequest && createdRentRequest.paymentPlan === 1 ? ' month' : ' months'} </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <div className='form-group my-5'>
-                                <input type='submit' className='btn btn-lg btn-purple form-control'  value='Accept' /> 
-                            </div>
-                        </form>
                     </div>
                 </div>
         

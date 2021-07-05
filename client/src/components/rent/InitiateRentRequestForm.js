@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { getAccommodationStatuses } from '../../redux/actions/accommodationStatusActions'
+import { useDispatch, useSelector } from 'react-redux'
 
 const InitiateRentRequestForm = ({  handleRentRequest, 
     salaryAmount, paymentPlan, requestAmount,
@@ -9,6 +11,9 @@ const InitiateRentRequestForm = ({  handleRentRequest,
    
     const [accommodationStatus, setAccommodationStatus] = useState('renew_rent')
     const [errors, setErrors] = useState({})
+    const dispatch = useDispatch()
+
+    const { statuses } = useSelector(state => state.accommodationStatuses )
 
     const validateRequestAmount = (requestAmount) => {
         const updatedErrors = {...errors}
@@ -31,6 +36,7 @@ const InitiateRentRequestForm = ({  handleRentRequest,
     }
 
 
+
     const validateFormDetails = () => {
         const errors = {}
         
@@ -42,9 +48,6 @@ const InitiateRentRequestForm = ({  handleRentRequest,
             errors.salaryAmount = 'The salary amount field is required'
         }
 
-        if (!paymentPlan) {
-            errors.paymentPlan = 'The payment plan field is required'
-        }
         if (Object.keys(errors).length > 0) {
             setErrors(errors)
             return false;
@@ -63,6 +66,10 @@ const InitiateRentRequestForm = ({  handleRentRequest,
         }
     }
 
+    useEffect(() => {
+        dispatch(getAccommodationStatuses())
+    }, [])
+
 
     return (<div className ="card p-3">
     <div className='card-body'>
@@ -75,16 +82,9 @@ const InitiateRentRequestForm = ({  handleRentRequest,
         <form onSubmit={handleSubmit} className='mt-3'>
             <div className='form-group'>
                 <label>What's your accomodation status ?</label>
-                <div className={`${'burger-card'} ${accommodationStatus === 'renew_rent' && 'purple'}`} 
-                onClick={() => setAccommodationStatus('renew_rent')}>
-                    Looking to renew my rent
-                </div>
-                <div className={`burger-card my-3 ${accommodationStatus === 'pay_new_place' && 'purple'}`} onClick={() => setAccommodationStatus('pay_new_place')}>
-                    Want to pay for a new place
-                </div>
-                <div className={`burger-card ${accommodationStatus === 'still_searching' && 'purple'}`} onClick={() => setAccommodationStatus('still_searching')}>
-                    I'm still searching
-                </div>
+                { statuses.map(status => (<div key={status.code} className={`burger-card mb-3 ${accommodationStatus === status.code && 'purple'}`} onClick={() => setAccommodationStatus(status.code)}>
+                    { status.friendlyName }
+                </div>))}
             </div>
             <div className='form-group my-3'>
                 <label>How much is your rent request amount ?</label>
@@ -115,7 +115,7 @@ const InitiateRentRequestForm = ({  handleRentRequest,
                 <select className='form-control' name='paymentPlan' value={paymentPlan} onChange={({ target: {value }}) => {
                     handlePaymentPlan(value)
                 }}>
-                    <option value='1'>1 Month</option>
+                    <option value='1' defaultChecked>1 Month</option>
                     <option value='3'>3 Months</option>
                     <option value='6'>6 Months</option>
                     <option value='12'>12 Months</option>
