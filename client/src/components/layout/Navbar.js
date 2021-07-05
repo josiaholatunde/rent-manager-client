@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { logOutUserOnTokenExpiration } from '../../redux/actions/authActions'
 import { withRouter } from "react-router-dom";
 import { showNotification } from '../../util/notifications/NotificationUtil';
-import kwaba from '../../icons/logo.png'
 import './Navbar.scss'
 const Navbar = ({ history }) => {
 

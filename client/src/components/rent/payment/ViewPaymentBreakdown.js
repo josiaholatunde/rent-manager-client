@@ -26,6 +26,7 @@ const ViewPaymentBreakdown = ({ match }) => {
         if (rentRequestId) {
             dispatch(getRentRequest(rentRequestId))
         }
+            // eslint-disable-next-line
     }, [])
 
     return loading ? <Spinner /> :  (
@@ -44,7 +45,7 @@ const ViewPaymentBreakdown = ({ match }) => {
 
                             <div className='form-group my-3'>
                                 <label>Monthly payment plan ?</label>
-                                <div> { createdRentRequest && createdRentRequest.paymentPlan } { createdRentRequest.paymentPlan === 1 ? ' month' : ' months' } </div>
+                                <div> { createdRentRequest && createdRentRequest.paymentPlan } { createdRentRequest &&  createdRentRequest.paymentPlan === 1 ? ' month' : ' months' } </div>
                             </div>
 
                             <div className='form-group my-3'>

@@ -34,7 +34,3 @@ export const getAccommodationStatuses = () => dispatch => {
         console.error('Error', error)
     }
 }
-
-const getLoggedInUser = () => {
-    return JSON.parse(localStorage.getItem('user'))
-}

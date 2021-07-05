@@ -68,6 +68,7 @@ const InitiateRentRequestForm = ({  handleRentRequest,
 
     useEffect(() => {
         dispatch(getAccommodationStatuses())
+        // eslint-disable-next-line
     }, [])
 
 

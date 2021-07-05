@@ -1,6 +1,6 @@
 import axios from '../../util/axiosConfig'
 import { hideLoading, showLoading } from './loadingActions'
-import { CREATE_RENT_REQUEST, SET_ERROR, FETCH_RENT_REQUEST } from './types'
+import { CREATE_RENT_REQUEST, SET_ERROR } from './types'
 import { showNotification } from '../../util/notifications/NotificationUtil';
 
 export const handleRentRequest = (rentPayload, history) => dispatch => {
