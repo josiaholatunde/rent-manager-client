@@ -20,8 +20,8 @@ const Navbar = ({ history }) => {
         if (user && user.fullName) {
             let fullName = user.fullName
             fullName = fullName.charAt(0).toUpperCase() + fullName.substr(1);
-            if (fullName.trim().length > 4) {
-                return fullName.substr(0, 4)
+            if (fullName.trim().length > 9) {
+                return fullName.substr(0, 9)
             }
             return fullName;
         }
