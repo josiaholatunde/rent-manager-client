@@ -21,10 +21,6 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get('/', (req, res, next) => {
-    res.send('Hello from the base url');
-});
-
 const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
