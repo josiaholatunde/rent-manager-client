@@ -3,7 +3,7 @@ import { hideLoading, showLoading } from './loadingActions'
 import { CREATE_RENT_REQUEST, SET_ERROR } from './types'
 import { showNotification } from '../../util/notifications/NotificationUtil';
 
-export const handleRentRequest = (rentPayload, history) => async dispatch => {
+export const handleRentRequest = (rentPayload, history) => dispatch => {
     try {
         dispatch(showLoading())
         setTimeout(async() => {

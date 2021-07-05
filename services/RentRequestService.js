@@ -6,12 +6,12 @@ const computeMonthlyPayment = (requestAmount, paymentPlan) => {
     const monthlyPayment = requestAmount / paymentPlan;
     const interestPercentage = (process.env.MONTHLY_INTEREST || DEFAULT_INTEREST_PERCENTAGE) + 100;
     const totalMonthlyPayment = (interestPercentage * monthlyPayment) / 100;
-    return currencyFormatter(totalMonthlyPayment)
+    return totalMonthlyPayment
 }
 module.exports = {
     save: async(payload) => {
         try {
-            const monthlyPayment = computeMonthlyPayment(payload.requestAmount, payload.paymentPlan)
+            const monthlyAmount = computeMonthlyPayment(payload.requestAmount, payload.paymentPlan)
             const rentRequest = new RentRequest({...payload, monthlyAmount });
             return await rentRequest.save();
         } catch (ex) {

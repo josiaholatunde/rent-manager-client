@@ -94,7 +94,7 @@ const InitiateRentRequestForm = ({  handleRentRequest,
 
             <div className='form-group my-3'>
                 <label>How much do you earn monthly ?</label>
-                <input type='text' name='salaryAmount' value={salaryAmount} 
+                <input type='number' name='salaryAmount' value={salaryAmount} 
                 className='form-control' onChange={({ target: { value }}) => { 
                     handleSalaryAmount(value)
                     validateSalaryAmount(value)

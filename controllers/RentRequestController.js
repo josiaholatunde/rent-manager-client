@@ -19,15 +19,14 @@ module.exports = {
         try {
             //include transactions
             const { requester } = req.body
-            if (await UserService.findById(requester)) {
-                return ResponseService.send(403, res, 'Invalid requester', null, {
+            if (!await UserService.findById(requester)) {
+                return ResponseService.send(400, res, 'Invalid requester', null, {
                     msg: 'Invalid requester'
                 })
             }
 
             const createdRentRequest = await RentRequestService.save(req.body);
-
-            return ResponseService.send(201, res, 'Successfully created new rent request', rent, createdRentRequest)
+            return ResponseService.send(201, res, 'Successfully created new rent request', createdRentRequest, null)
         } catch (err) {
             console.log(err);
             return ResponseService.send(500, res, 'An error occurred while creating rent request', null, {

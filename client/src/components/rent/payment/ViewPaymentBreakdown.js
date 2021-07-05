@@ -7,7 +7,7 @@ import Spinner from '../../layout/Spinner'
 import '../CreateRentRequest.scss'
 import './PaymentBreakdown.scss'
 
-const PaymentBreakdown = ({ 
+const ViewPaymentBreakdown = ({ 
     history,
     salaryAmount,
     requestAmount, paymentPlan, handleRequestAmount,  
@@ -17,7 +17,6 @@ const PaymentBreakdown = ({
 
     const loading = useSelector(state => state.loading);
 
-    const DEFAULT_INTEREST_PERCENTAGE = 2;
 
     const submitRentRequest =  (event) => {
         event.preventDefault()
@@ -86,4 +85,4 @@ const PaymentBreakdown = ({
     );
 }
 
-export default connect(null, null)(withRouter(PaymentBreakdown))
+export default connect(null, null)(withRouter(ViewPaymentBreakdown))

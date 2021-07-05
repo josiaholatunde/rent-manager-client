@@ -13,7 +13,6 @@ const CreateRentRequest = () => {
 
     const handleRentRequest = () => {
         setShouldDisplayPaymentBreakDown(true);
-
     }
 
     return (
@@ -26,7 +25,8 @@ const CreateRentRequest = () => {
                     handleRequestAmount= {setRequestAmount}
                     handlePaymentPlan={setPaymentPlan}
                     requestAmount={requestAmount} 
-                    paymentPlan={paymentPlan} /> : 
+                    paymentPlan={paymentPlan}
+                    handleShouldDisplayPaymentBreakDown={(value) => setShouldDisplayPaymentBreakDown(value)} /> : 
 
                     <InitiateRentRequestForm 
                     handleRentRequest={handleRentRequest} 

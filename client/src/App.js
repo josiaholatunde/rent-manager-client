@@ -13,7 +13,7 @@ import './App.scss';
 import history from "./util/history";
 import { SET_LOGGED_IN_USER } from "./redux/actions/types"
 import setAuthToken from './util/setAuthToken'
-
+import PrivateRoute from './components/onboarding/PrivateRoute'
 
 const token = localStorage.getItem('token');
 let user = localStorage.getItem('user');
@@ -38,10 +38,10 @@ function App() {
                 <Switch>
                   <Route path='/login' exact component={Login} />
                   <Route path='/sign-up' exact component={Signup} />
-                  <Route path='/rent-request/add' exact component={CreateRentRequest} />
-                  <Notification />
+                  <PrivateRoute path='/rent-request/add' exact component={CreateRentRequest} />
                 </Switch>
               </div>
+              <Notification />
             </Router>
           </Provider>
   

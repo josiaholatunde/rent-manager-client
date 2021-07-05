@@ -96,7 +96,7 @@ const Login = ({ history, location }) => {
                                     <div className='form-group'>
                                         <input type='submit' 
                                         disabled={isLoginFormInvalid()}
-                                        className='btn btn-lg btn-green form-control' value='Login' />
+                                        className='btn btn-lg btn-purple form-control' value='Login' />
                                     </div>
                                     
                                 </form>

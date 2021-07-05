@@ -15,7 +15,7 @@ export const createUserAccount = (userToCreate, history) => async dispatch => {
                         // send success notification
                     dispatch({ type: CREATE_USER, payload: user })
                     dispatch(hideLoading())
-                        // showNotification('success', 'Registration was successful')
+                    showNotification('success', 'Registration was successful')
                         //redirect user to login
                     history.push('/login')
                 }
@@ -100,7 +100,7 @@ export const loginUser = (userToLogin, { history, location }) => dispatch => {
                 }
                 dispatch({ type: SET_ERROR, payload: errorMessage })
             }
-        }, 5000)
+        }, 2000)
 
     } catch (error) {
         //display error

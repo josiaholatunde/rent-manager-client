@@ -124,7 +124,7 @@ const Signup = ({ history }) => {
                                     <div className='form-group'>
                                         <input type='submit' 
                                         disabled={isRegisterationFormInvalid()}
-                                        className='btn btn-lg btn-green form-control' value='Register' />
+                                        className='btn btn-lg btn-purple form-control' value='Register' />
                                     </div>
                                     
                                 </form>

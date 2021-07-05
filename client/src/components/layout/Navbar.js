@@ -1,13 +1,20 @@
 import React, { Fragment } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-
-const Navbar = () => {
+import { logOutUserOnTokenExpiration } from '../../redux/actions/authActions'
+import { withRouter } from "react-router-dom";
+import { showNotification } from '../../util/notifications/NotificationUtil';
+import kwaba from '../../icons/logo.png'
+import './Navbar.scss'
+const Navbar = ({ history }) => {
 
     const { user } = useSelector(state => state.auth)
+    const dispatch = useDispatch()
 
     const handleLogOut = () => {
-
+        dispatch(logOutUserOnTokenExpiration())
+        history.push('/login')
+        showNotification('success','Successfully logged out')
     }
 
     const getInitialOfLoggedInUser = user => {
@@ -23,11 +30,11 @@ const Navbar = () => {
 
     const exclusiveToOtherUsers = () => {
         return (<Fragment>
-            <li className="nav-item d-flex align-items-center">
+            <li className="nav-item d-flex align-items-center px-3">
                 <Link className="nav-link" to='/sign-up' >Sign up</Link>
             </li>
             <li className="nav-item d-flex align-items-center">
-                <Link className="nav-link" to='/login' >Login</Link>
+                <Link className="btn btn-outline-light" to='/login' >Login</Link>
             </li>
         </Fragment>)
     }
@@ -47,12 +54,11 @@ const Navbar = () => {
     }
 
 
-    return (<nav className="navbar navbar-expand-lg navbar-light bg-main text-white sticky-top" >
+    return (<nav className="navbar navbar-expand-lg navbar-light bg-purple sticky-top" >
     <div className='container'>
-        <Link className="navbar-brand" to="/">
-            <i className='fa fa-poll'></i>
-                Kwaba
-            </Link>
+        <Link className="navbar-brand logo-container"  to="/">
+            <img src={kwaba} />
+        </Link>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className='navbar-nav nav-right ml-auto'>
@@ -67,4 +73,4 @@ const Navbar = () => {
 </nav>)
 }
 
-export default Navbar;
+export default withRouter(Navbar);

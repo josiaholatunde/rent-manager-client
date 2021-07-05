@@ -15,7 +15,7 @@ module.exports = {
     },
     findById: async function(userId) {
         try {
-            const userFromDb = await User.findById(userId);
+            const userFromDb = await User.findOne({ _id: userId });
             return userFromDb;
         } catch (err) {
             console.log(err);
