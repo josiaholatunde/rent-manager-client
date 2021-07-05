@@ -1,6 +1,6 @@
-import { CREATE_RENT_REQUEST } from '../actions/types'
+import { CREATE_RENT_REQUEST, FETCH_RENT_REQUEST } from '../actions/types'
 const initialState = {
-    rentRequest: null
+    rentRequest: null,
 }
 
 const rentRequestReducer = (state = initialState, { type, payload }) => {

@@ -33,5 +33,28 @@ module.exports = {
                 msg: err
             })
         }
+    },
+    getRentRequest: async(req, res, next) => {
+
+        try {
+            const id = req.params.id;
+            if (!id) {
+                return ResponseService.send(400, res, 'Invalid request params', null, {
+                    msg: 'Invalid request params'
+                })
+            }
+            const rentRequest = await RentRequest.findOne({ _id: id });
+            if (!rentRequest) {
+                return ResponseService.send(404, res, 'Rent request does not exist', null, {
+                    msg: 'Rent request does not exist'
+                })
+            }
+            return ResponseService.send(200, res, 'Successfully fetched rent request', rentRequest, null)
+        } catch (err) {
+            console.log(err);
+            return ResponseService.send(500, res, 'An error occurred while fetching rent request', null, {
+                msg: err
+            })
+        }
     }
 }

@@ -14,6 +14,7 @@ import history from "./util/history";
 import { SET_LOGGED_IN_USER } from "./redux/actions/types"
 import setAuthToken from './util/setAuthToken'
 import PrivateRoute from './components/onboarding/PrivateRoute'
+import ViewPaymentBreakdown from "./components/rent/payment/ViewPaymentBreakdown";
 
 const token = localStorage.getItem('token');
 let user = localStorage.getItem('user');
@@ -40,6 +41,7 @@ function App() {
                   <Route path='/sign-up' exact component={Signup} />
                   <Route path='/' exact component={Signup} />
                   <PrivateRoute path='/rent-request/add' exact component={CreateRentRequest} />
+                  <PrivateRoute path='/rent-request/:id' exact component={ViewPaymentBreakdown} />
                 </Switch>
               </div>
               <Notification />

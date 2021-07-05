@@ -1,4 +1,4 @@
-const { createRentRequest } = require('../../controllers/RentRequestController')
+const { createRentRequest, getRentRequest } = require('../../controllers/RentRequestController')
 const { rentRequestValidator } = require('../../validators/rentRequestValidator')
 const authMiddleware = require('../../middlewares/auth')
 
@@ -8,6 +8,10 @@ const rentRequestRoutes = (app) => {
         authMiddleware,
         rentRequestValidator(),
     ], createRentRequest);
+
+    app.get('/api/v1/rent-request/:id', [
+        authMiddleware,
+    ], getRentRequest);
 }
 
 module.exports = rentRequestRoutes;

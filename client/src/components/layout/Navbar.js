@@ -20,6 +20,7 @@ const Navbar = ({ history }) => {
     const getInitialOfLoggedInUser = user => {
         if (user && user.fullName) {
             let fullName = user.fullName
+            fullName = fullName.charAt(0).toUpperCase() + fullName.substr(1);
             if (fullName.trim().length > 4) {
                 return fullName.substr(0, 4)
             }
