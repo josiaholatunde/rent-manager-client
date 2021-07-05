@@ -69,7 +69,7 @@ const InitiateRentRequestForm = ({  handleRentRequest,
     <div class='d-flex justify-content-between'>
         <h5 className='text-dark-purple'>Payment Option</h5>
         <div className='d-flex' style={{ width: 30, height: 30 }}>
-            <CircularProgressbar value={50} text={`50%`} styles={buildStyles({backgroundColor: '#25dc99'})} />
+            <CircularProgressbar value={50} text={`50%`} styles={buildStyles({pathColor: '#25dc99'})} />
         </div>
     </div>
         <form onSubmit={handleSubmit} className='mt-3'>
