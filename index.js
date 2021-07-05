@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 var cors = require('cors')
 const bodyParser = require('body-parser');
 const Role = require('./models/Role')
-const { seedDatabaseWithRoles } = require('./seeders/RoleSeeder')
+const { seedData } = require('./services/DatabaseSeederService')
 
 
 const app = express();
@@ -43,17 +43,16 @@ db.on('error', (err) => console.log(err));
 db.once('open', async() => {
     require('./routes/api/authRoutes')(app);
     require('./routes/api/rentRequestRoutes')(app);
+    require('./routes/api/accommodationStatusRoutes')(app);
     if (process.env.NODE_ENV === 'production') {
-        app.use(express.static('../netsafari-spa/build'))
+        app.use(express.static('../client/build'))
 
         app.get('*', (req, res) => {
-            res.sendFile(path.resolve(__dirname, 'netsafari-spa', 'build', 'index.html'))
+            res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
         });
     }
 
-    if (await Role.isRolesCollectionEmpty()) {
-        await seedDatabaseWithRoles();
-    }
+    seedData();
     console.log(`Successfully connected to the database`);
 });
 
